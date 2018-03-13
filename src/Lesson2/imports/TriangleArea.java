@@ -1,7 +1,7 @@
-package imports;
+package Lesson2.imports;
 
 import java.util.Scanner;
-import Homework2;
+import Lesson2.Homework2;
 
 public class TriangleArea {
 	public static void main(String[] args) {

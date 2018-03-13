@@ -1,9 +1,10 @@
+package Lesson2;
 //import java.io.IOException; 	// Пробовал делать ввод через System.in самостоятельно, eclipce подставил
 
 import java.util.Scanner; //импорт класса сканнера
-import imports.Numbers; // импорт класса для первой задачки
-import imports.TriangleArea; // импорт класса для второй задачки
-import imports.Circumference;	// импорт класса для третьей задачки
+import Lesson2.imports.Numbers; // импорт класса для первой задачки
+import Lesson2.imports.TriangleArea; // импорт класса для второй задачки
+import Lesson2.imports.Circumference;	// импорт класса для третьей задачки
 
 public class Homework2 {
 
