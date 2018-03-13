@@ -7,7 +7,7 @@ enum Binding {
 public class Book {
 	static int numberOfBooks = 0;
 	private int id;
-	private Content content;
+	public Content content;
 	private String publisher;
 	private int year;
 	private int numberOfPages;
