@@ -5,7 +5,7 @@ enum Jenre {
 }
 
 public class Content {
-	public String author;
+	private String author;
 	private String name;
 	private Jenre jenre;
 
