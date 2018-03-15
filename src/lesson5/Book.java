@@ -1,4 +1,4 @@
-package Lesson5;
+package lesson5;
 
 enum Binding {
 	HARD, SOFT, PLASTIC
