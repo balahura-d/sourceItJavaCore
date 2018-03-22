@@ -4,22 +4,55 @@ import Lesson6.homework.Sweets;
 
 public class Candies implements Sweets {
 
+	private double weight;
+	private double sugar;
+	private String name;
+
+	public Candies(String name, double weight, double sugar) {
+		try {
+			this.name = name;
+			this.weight = weight;
+			if (sugar < weight)
+				this.sugar = sugar;
+			else
+				throw new IllegalArgumentException(); // как можно в этом случае не создавать конфету?
+		} catch (IllegalArgumentException e) {
+			System.out.println("Can't create this candy!");
+			return;
+		}
+
+	}
+
 	@Override
 	public double getWeight() {
-		// TODO Auto-generated method stub
-		return 0;
+		return weight;
 	}
 
 	@Override
 	public double getSugar() {
-		// TODO Auto-generated method stub
-		return 0;
+		return sugar;
 	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return name;
 	}
 
+	@Override
+	public String toString() {
+		return String.format("\"%s\" weights %.3f gramms with %.0f%% sugar in.", name, weight,
+				(sugar / weight * 100));
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == this) {
+			return true;
+		}
+		if (obj == null || obj.getClass() != this.getClass()) {
+			return false;
+		}
+		Candies can = (Candies) obj;
+		return weight == can.getWeight() && sugar == can.getSugar() && name.equals(can.getName());
+	}
 }
