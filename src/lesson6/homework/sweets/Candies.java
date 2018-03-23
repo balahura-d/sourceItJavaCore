@@ -1,6 +1,6 @@
-package Lesson6.homework.sweets;
+package lesson6.homework.sweets;
 
-import Lesson6.homework.Sweets;
+import lesson6.homework.Sweets;
 
 public class Candies implements Sweets {
 
@@ -52,7 +52,7 @@ public class Candies implements Sweets {
 		if (obj == null || obj.getClass() != this.getClass()) {
 			return false;
 		}
-		Candies can = (Candies) obj;
-		return weight == can.getWeight() && sugar == can.getSugar() && name.equals(can.getName());
+		Candies c = (Candies) obj;
+		return weight == c.getWeight() && sugar == c.getSugar() && name.equals(c.getName());
 	}
 }
