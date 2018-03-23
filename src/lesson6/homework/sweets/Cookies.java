@@ -1,6 +1,6 @@
-package Lesson6.homework.sweets;
+package lesson6.homework.sweets;
 
-import Lesson6.homework.Sweets;
+import lesson6.homework.Sweets;
 
 public class Cookies implements Sweets {
 
@@ -37,8 +37,20 @@ public class Cookies implements Sweets {
 		if (sugar != 0) {
 			return String.format("\"%s\" weights %.3f with %f grams sugar in.", name, weight, sugar);
 		} else {
-			return String.format("\"%s\" weights %.3f with no sugar.",name, weight);
+			return String.format("\"%s\" weights %.3f with no sugar.", name, weight);
 
 		}
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == this) {
+			return true;
+		}
+		if (obj == null || obj.getClass() != this.getClass()) {
+			return false;
+		}
+		Cookies c = (Cookies) obj;
+		return weight == c.getWeight() && sugar == c.getSugar() && name.equals(c.getName());
 	}
 }
