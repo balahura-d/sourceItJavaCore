@@ -1,11 +1,9 @@
-package lesson9.homework9;
+package lesson9.homework9.textEditor;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-
-import lesson9.homework9.textEditor.TextStat;
 
 public class TextNotQuiteEditor {
 
@@ -17,16 +15,17 @@ public class TextNotQuiteEditor {
 		}
 
 		try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-				OutputStream fout = Files.newOutputStream(Paths.get(args[0]), StandardOpenOption.CREATE,
-						StandardOpenOption.APPEND)) {
-			while(true)
-			{
+				BufferedOutputStream bw = new BufferedOutputStream(
+						Files.newOutputStream(Paths.get(args[0]), StandardOpenOption.CREATE,
+								StandardOpenOption.APPEND))) {
+			while (true) {
 				String s = br.readLine();
 				if (s.equals("exit")) {
-					TextStat.showTextStat(Paths.get(args[0]));
+					TextStat.showTextStat(args[0]);
 					return;
 				}
-				fout.write((s+"\n").getBytes());
+				Files.write(Paths.get(args[0]), (s + "\n").getBytes(), StandardOpenOption.CREATE,
+						StandardOpenOption.APPEND);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -31,9 +31,9 @@ public class Homework4 {
 		System.out.println(s + "?\nТы сказал "+numberOfWords(s)+" слов.");
 	}
 
-	private static int numberOfWords(String str) {
+	public static int numberOfWords(String str) {
 		// TODO Auto-generated method stub
-		String [] words = str.split("[ -#$%^&!?,.0-9\\s]+");
+		String [] words = str.split("[#$%^&!?,.0-9\\s]+");
 		return words.length;
 	}
 
