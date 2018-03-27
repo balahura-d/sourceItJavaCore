@@ -1,6 +1,12 @@
 package lesson9.homework9;
 
+import java.util.ArrayList;
+
 public class DefaultMyList<T> implements MyList {
+	
+	ArrayList<T> obj = new ArrayList<T>();
+	ArrayList<Integer> numOfObj = new ArrayList<Integer>();
+		
 	@Override
 	public void add(Object e) {
 	}
