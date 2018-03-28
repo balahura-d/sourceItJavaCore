@@ -37,7 +37,7 @@ public class ClockDegrees {
 			if (!m.matches()) {
 				System.out.println(s + " - Неизвестный формат времени!");
 			} else {
-				int[] iii = Arrays.stream(s.split("[ :\\.,]{1}"))
+				int[] iii = Arrays.stream(s.split("[ :\\.,]{1}|\\D{0,2}"))
 						.mapToInt(Integer::parseInt)
 						.toArray();
 				

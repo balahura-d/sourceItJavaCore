@@ -21,7 +21,7 @@ public class TextNotQuiteEditor {
 			while (true) {
 				String s = br.readLine();
 				if (s.equals("exit")) {
-					TextStat.showTextStat(args[0]);
+					TextStat.getTextStat(args[0]);
 					return;
 				}
 				Files.write(Paths.get(args[0]), (s + "\n").getBytes(), StandardOpenOption.CREATE,
