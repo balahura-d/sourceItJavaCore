@@ -100,4 +100,16 @@ public class DefaultMyList<T> implements MyList<T> {
 		return obj.get(index);
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < obj.size(); i++) {
+			sb.append('[');
+			sb.append(obj.get(i).toString());
+			sb.append(" :: ");
+			sb.append(numOfObj.get(i));
+			sb.append(']'+System.lineSeparator());
+		}
+		return sb.toString();
+		
+	}
 }
