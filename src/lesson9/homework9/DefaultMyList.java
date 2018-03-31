@@ -11,10 +11,11 @@ public class DefaultMyList<T> implements MyList<T> {
 	public void add(T t) {
 		if (obj.contains(t)) { // если в обж уже есть элемент,
 			numOfObj.set(obj.indexOf(t), // то по его индексу
-					(numOfObj.get(obj.indexOf(t) + 1))); // инкрементим значение его кол-ва
+					(numOfObj.get(obj.indexOf(t)) + 1)); // инкрементим значение его кол-ва
 		} else { // если же нет -
 			obj.add(t); // добавляем в список
-			numOfObj.set(obj.size() - 1, 1); // и указываем, что он первый
+			numOfObj.add(1);
+		//	numOfObj.set(obj.size() - 1, 1); // и указываем, что он первый
 		}
 	}
 
@@ -28,7 +29,7 @@ public class DefaultMyList<T> implements MyList<T> {
 	public boolean remove(Object t) {
 		if ((obj.contains(t)) & (numOfObj.get(obj.indexOf(t)) > 1)) { // если элементов больше одного
 			numOfObj.set(obj.indexOf(t), // то по индексу элемена
-					numOfObj.get(obj.indexOf(t) - 1)); // мы записываем меньшее на 1 количество
+					(numOfObj.get(obj.indexOf(t))) - 1); // мы записываем меньшее на 1 количество
 			return true; // и всё норм
 		} else if ((obj.contains(t)) & (numOfObj.get(obj.indexOf(t)) == 1)) { // если элемент остался 1
 			numOfObj.remove(obj.indexOf(t)); // удаляем инфо о его количестве (сначала, потому что ищем по
@@ -101,14 +102,19 @@ public class DefaultMyList<T> implements MyList<T> {
 	}
 
 	public String toString() {
+		if (this.size() == 0)
+			return "{empty}";
 		StringBuilder sb = new StringBuilder();
+		sb.append("{");
 		for (int i = 0; i < obj.size(); i++) {
 			sb.append('[');
 			sb.append(obj.get(i).toString());
 			sb.append(" :: ");
 			sb.append(numOfObj.get(i));
-			sb.append(']'+System.lineSeparator());
+			sb.append(']'+ ", ");
 		}
+		sb.delete(sb.length()-2, sb.length());
+		sb.append("}");
 		return sb.toString();
 		
 	}
