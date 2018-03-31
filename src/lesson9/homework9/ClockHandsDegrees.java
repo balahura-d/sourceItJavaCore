@@ -9,62 +9,64 @@ import java.util.regex.*;
 //import java.util.Calendar;
 //import java.util.GregorianCalendar;
 
-public class ClockDegrees {
-	@SuppressWarnings("deprecation")
+public class ClockHandsDegrees {
 	public static void main(String[] args) {
 
+		Date d = inputTime();
+		//System.out.println(d);
+		
+		//System.out.printf("%.2f\n", getDegreesHMS(d));
+		//System.out.printf("%.2f\n", getDegreesMS(d));
+		//System.out.printf("%.2f\n", getDegreesS(d));
+		System.out.printf("Разница между часовой и минутной стрелкой равна  %.2f%n",
+				getDegreesBetwenHourAndMinute(d));
+		System.out.printf("Разница между минутной и секундной стрелкой равна %.2f%n",
+				getDegreesBetwenMinuteAndSecond(d));
+		System.out.printf("Разница между часовой и секундной стрелкой равна %.2f%n",
+				getDegreesBetwenHourAndSecond(d));
+	}
+
+	@SuppressWarnings("deprecation")
+	private static Date inputTime() {
 		String sTime;
 		ArrayList<Integer> hhmmss = new ArrayList<>();
 		// Calendar c = new GregorianCalendar();
-		Date d = new Date();
-
+		Date date = new Date();
 		try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in));) {
 			System.out.print("Enter time here: ");
-
-			Pattern pTime = Pattern
+			
+			Pattern pTime = Pattern //вот регулярное выражение под время можно упростить, наверно.
 					.compile("\\d{1,2}[ :\\.,]{1}\\d{2}([ :\\.,]{1}\\d{2})?( ?(p|P|a|A)(m|M))?");
 			Matcher mTime = pTime.matcher(sTime = br.readLine());
-
+			
 			if (mTime.matches()) {
 				Pattern pDigits = Pattern.compile("\\d+");
 				Matcher mDigits = pDigits.matcher(sTime);
 				while (mDigits.find()) {
 					hhmmss.add(Integer.valueOf(mDigits.group()));
 				}
-
+				
 				// c.set(Calendar.HOUR_OF_DAY, hhmmss.get(0));
 				// c.set(Calendar.MINUTE, hhmmss.get(1));
-				d.setHours(hhmmss.get(0)); // ну вот удобнее через дату получилось
-				d.setMinutes(hhmmss.get(1));
+				date.setHours(hhmmss.get(0)); // ну вот удобнее через дату получилось
+				date.setMinutes(hhmmss.get(1));
 				if (hhmmss.size() == 3) { // если пользователь вводил и секунды, то массив хранит 3
-								// значения
+					// значения
 					// c.set(Calendar.SECOND, hhmmss.get(2));
-					d.setSeconds(hhmmss.get(2));
+					date.setSeconds(hhmmss.get(2));
 				} else { // если не вводил - по-умолчанию считаем 0 секунд
-					d.setSeconds(0);
+					date.setSeconds(0);
 				}
-
-				System.out.println(d);
-				System.out.printf("%.2f\n", getDegreesH(d));
-				System.out.printf("%.2f\n", getDegreesHM(d));
-				System.out.printf("%.2f\n", getDegreesHMS(d));
-				System.out.printf("%.2f\n", getDegreesM(d));
-				System.out.printf("%.2f\n", getDegreesMS(d));
-				System.out.printf("%.2f\n", getDegreesS(d));
-				System.out.printf("Разница между часовой и минутной стрелкой равна  %.2f%n",
-						getDegreesBetwenHourAndMinute(d));
-				System.out.printf("Разница между минутной и секундной стрелкой равна %.2f%n",
-						getDegreesBetwenMinuteAndSecond(d));
-				System.out.printf("Разница между часовой и секундной стрелкой равна %.2f%n",
-						getDegreesBetwenHourAndSecond(d));
+				return date;
 			} else {
 				System.out.println(sTime + " - Неизвестный формат времени!");
-				main(null);
+				throw new IllegalArgumentException();
 			}
-
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return new Date();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -101,21 +103,18 @@ public class ClockDegrees {
 	}
 
 	public static double getDegreesBetwenHourAndMinute(Date date) {
-		// return (Math.abs(getDegreesHMS(date) - getDegreesMS(date)));
 		return (getDegreesHMS(date) > getDegreesMS(date)) 
 				? (360 - getDegreesHMS(date) + getDegreesMS(date))
 				: (getDegreesMS(date) - getDegreesHMS(date));
 	}
 
 	public static double getDegreesBetwenMinuteAndSecond(Date date) {
-		// return (Math.abs(getDegreesMS(date) - getDegreesS(date)));
 		return (getDegreesMS(date) > getDegreesS(date)) 
 				? (360 - getDegreesMS(date) + getDegreesS(date))
 				: (getDegreesS(date) - getDegreesMS(date));
 	}
 
 	public static double getDegreesBetwenHourAndSecond(Date date) {
-		// return (Math.abs(getDegreesHMS(date) - getDegreesS(date)));
 		return (getDegreesHMS(date) > getDegreesS(date)) 
 				? (360 - getDegreesHMS(date) + getDegreesS(date))
 				: (getDegreesS(date) - getDegreesHMS(date));
