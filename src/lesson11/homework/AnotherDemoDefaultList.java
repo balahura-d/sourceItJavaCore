@@ -1,6 +1,6 @@
 package lesson11.homework;
 
-public class DemoDefaultList {
+public class AnotherDemoDefaultList {
 
 	public static void main(String[] args) {
 

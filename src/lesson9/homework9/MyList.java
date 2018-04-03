@@ -1,6 +1,8 @@
 package lesson9.homework9;
 
-public interface MyList<T> {
+import java.util.Iterator;
+
+public interface MyList<T> extends Iterable<Object> {
 	
 	void add(T t); // appends the specified element to the end of this list
 
@@ -17,4 +19,6 @@ public interface MyList<T> {
 	boolean containsAll(MyList<?> ml); // returns true if this list contains all of the elements of the specified list
 	
 	T get(int index);
+	
+	Iterator<Object> iterator();
 }
