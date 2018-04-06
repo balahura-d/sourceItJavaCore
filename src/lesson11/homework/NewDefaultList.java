@@ -1,19 +1,22 @@
 package lesson11.homework;
 
+import java.util.Arrays;
 import java.util.Iterator;
 
 import lesson9.homework9.MyList;
 
-public class NewDefaultList implements MyList<Object>, ListIterable {
+public class NewDefaultList<T> implements MyList<T>, ListIterable {
 
-	int capacity;
+	private int capacity = 10;
+	private int size = 0;
+	Object[] data;
 
 	public NewDefaultList() {
-
+		data = new Object[capacity];
 	}
 
-	public NewDefaultList(int n) {
-
+	public NewDefaultList(int init) {
+		data = new Object[init];
 	}
 
 	@Override
@@ -22,43 +25,65 @@ public class NewDefaultList implements MyList<Object>, ListIterable {
 	}
 
 	@Override
-	public void add(Object t) {
-
+	public void add(T t) {
+		data[size] = t;
+		if ((size++) == capacity) {
+			capacity = (int) ((capacity * 1.5 < Integer.MAX_VALUE) ? (capacity * 1.5)
+					: (Integer.MAX_VALUE));
+		}
 	}
 
 	@Override
 	public void clear() {
-
+		for (int i = 0; i < size; i++)
+			data[i] = null;
+		size = 0;
 	}
 
 	@Override
-	public boolean remove(Object t) {
+	public boolean remove(T t) {
+		for (int i = 0; i < size; i++)
+			if (t.equals(data[i])) {
+				System.arraycopy(data, i + 1, data, i, size - i - 1);
+				data[--size] = null;
+				return true;
+			}
 		return false;
 	}
 
 	@Override
 	public Object[] toArray() {
-		return null;
+		return Arrays.copyOf(data, size);
 	}
 
 	@Override
 	public int size() {
-		return 0;
+		return size;
 	}
 
 	@Override
-	public boolean contains(Object t) {
+	public boolean contains(Object o) {
+		for (int i = 0; i < size; i++)
+			if (o.equals(data[i])) 
+				return true;
 		return false;
 	}
 
 	@Override
 	public boolean containsAll(MyList<?> ml) {
-		return false;
+		for (Object o : ml)
+			if (!contains(o))
+				return false;
+		return true;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Object get(int index) {
-		return null;
+	public T get(int index) {
+		if (index < size)
+			return (T) data[index];
+		else
+			throw new IndexOutOfBoundsException("Index " + index + " > Size " + size);
 	}
 
 	@Override
@@ -82,4 +107,5 @@ public class NewDefaultList implements MyList<Object>, ListIterable {
 			// …
 		}
 	}
+
 }
