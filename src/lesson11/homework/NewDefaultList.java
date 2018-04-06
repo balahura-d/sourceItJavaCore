@@ -2,6 +2,7 @@ package lesson11.homework;
 
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import lesson9.homework9.MyList;
 
@@ -41,9 +42,9 @@ public class NewDefaultList<T> implements MyList<T>, ListIterable {
 	}
 
 	@Override
-	public boolean remove(T t) {
+	public boolean remove(Object obj) {
 		for (int i = 0; i < size; i++)
-			if (t.equals(data[i])) {
+			if (obj.equals(data[i])) {
 				System.arraycopy(data, i + 1, data, i, size - i - 1);
 				data[--size] = null;
 				return true;
@@ -64,7 +65,7 @@ public class NewDefaultList<T> implements MyList<T>, ListIterable {
 	@Override
 	public boolean contains(Object o) {
 		for (int i = 0; i < size; i++)
-			if (o.equals(data[i])) 
+			if (o.equals(data[i]))
 				return true;
 		return false;
 	}
@@ -92,19 +93,34 @@ public class NewDefaultList<T> implements MyList<T>, ListIterable {
 	}
 
 	private class IteratorImpl implements Iterator<Object> {
+		int cursor = 0;
+		int returned = 0;
+
 		public boolean hasNext() { // returns true if the iteration has more elements
 			// …
-			return false;
+			return (cursor != size);
 		}
 
-		public Object next() { // returns the next element in the iteration
-			// …
-			return null;
+		public T next() { // returns the next element in the iteration
+			// … public E next() {
+			try {
+				int i = cursor;
+				T next = get(i);
+				cursor = i + 1;
+				returned++;
+				return next;
+			} catch (IndexOutOfBoundsException e) {
+				throw new NoSuchElementException();
+			}
 		}
 
 		public void remove() { // removes from the underlying collection the last element returned by this
 					// iterator
-			// …
+			if (returned != 0) {
+				NewDefaultList.this.remove(data[cursor - returned]);
+				returned = 0;
+			} else
+				throw new IllegalStateException();
 		}
 	}
 
