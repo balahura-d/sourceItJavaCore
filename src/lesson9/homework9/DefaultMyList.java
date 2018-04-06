@@ -1,8 +1,9 @@
 package lesson9.homework9;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
-public class DefaultMyList<T> implements MyList<T> {
+public class DefaultMyList<T> implements MyList<T>  {
 
 	ArrayList<T> obj = new ArrayList<T>();
 	ArrayList<Integer> numOfObj = new ArrayList<Integer>();
@@ -117,5 +118,10 @@ public class DefaultMyList<T> implements MyList<T> {
 		sb.append("}");
 		return sb.toString();
 		
+	}
+
+	@Override
+	public Iterator<Object> iterator() {
+		return null;
 	}
 }
