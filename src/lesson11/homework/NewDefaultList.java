@@ -21,8 +21,35 @@ public class NewDefaultList<T> implements MyList<T>, ListIterable {
 	}
 
 	@Override
-	public ListIterator listIterator() {
-		return null;
+	public ListIterator<Object> listIterator() {
+		return new ListIteratorImpl(0);
+	}
+
+	@Override
+	public String toString() {
+		if (size() == 0)
+			return "{empty}";
+		StringBuilder sb = new StringBuilder();
+		sb.append("[");
+		for (int i = 0; ; i++) {
+			sb.append(get(i).toString());
+			if (i == (size()-1))
+				return sb.append(']').toString();
+			sb.append(", ");
+		}
+	}
+	
+	public ListIterator<Object> listIterator(int index) {
+		if (index < 0 || index > size)
+			throw new IndexOutOfBoundsException("Index: " + index);
+		return new ListIteratorImpl(index);
+	}
+
+	public void set(int i, Object obj) {
+		if (i < size)
+			data[i] = obj;
+		else
+			throw new IndexOutOfBoundsException("Index " + i + " > Size " + size);
 	}
 
 	@Override
@@ -84,7 +111,7 @@ public class NewDefaultList<T> implements MyList<T>, ListIterable {
 		if (index < size)
 			return (T) data[index];
 		else
-			throw new IndexOutOfBoundsException("Index " + index + " > Size " + size);
+			throw new IndexOutOfBoundsException("Index " + index + " >= Size " + size);
 	}
 
 	@Override
@@ -94,7 +121,7 @@ public class NewDefaultList<T> implements MyList<T>, ListIterable {
 
 	private class IteratorImpl implements Iterator<Object> {
 		int cursor = 0;
-		int returned = 0;
+		int returned = -1;
 
 		public boolean hasNext() { // returns true if the iteration has more elements
 			// …
@@ -104,10 +131,10 @@ public class NewDefaultList<T> implements MyList<T>, ListIterable {
 		public T next() { // returns the next element in the iteration
 			// … public E next() {
 			try {
-				int i = cursor;
-				T next = get(i);
-				cursor = i + 1;
-				returned++;
+				int n = cursor;
+				T next = get(n);
+				returned = n;
+				cursor = n + 1;
 				return next;
 			} catch (IndexOutOfBoundsException e) {
 				throw new NoSuchElementException();
@@ -116,12 +143,44 @@ public class NewDefaultList<T> implements MyList<T>, ListIterable {
 
 		public void remove() { // removes from the underlying collection the last element returned by this
 					// iterator
-			if (returned != 0) {
-				NewDefaultList.this.remove(data[cursor - returned]);
-				returned = 0;
+			if (returned >= 0) {
+				NewDefaultList.this.remove(data[returned]);
+				returned = -1;
 			} else
 				throw new IllegalStateException();
 		}
+	}
+
+	private class ListIteratorImpl extends IteratorImpl implements ListIterator<Object> {
+
+		ListIteratorImpl(int index) {
+			super();
+			cursor = index;
+		}
+
+		@Override
+		public boolean hasPrevious() {
+			return cursor != 0;
+		}
+
+		@Override
+		public Object previous() {
+			int p = cursor - 1;
+			T previous = get(p);
+			returned = p;
+			cursor = p;
+			return previous;
+		}
+
+		@Override
+		public void set(Object obj) {
+			if (returned >= 0) {
+				NewDefaultList.this.set(returned, obj);
+				returned = -1;
+			} else
+				throw new IllegalStateException();
+		}
+
 	}
 
 }
