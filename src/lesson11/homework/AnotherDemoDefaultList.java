@@ -45,6 +45,13 @@ public class AnotherDemoDefaultList {
 			lit.set("lit works!");
 		}
 		System.out.println(ndl);
+
+		NewDefaultList<Integer> intNDL = new NewDefaultList<>();
+		for (int i = 0; i < 76; i++) {
+			intNDL.add(i);
+			System.out.println("Size:" + intNDL.size() + "\t\tcapacity:" + intNDL.capacity);
+		}
+		System.out.println(intNDL);
 	}
 
 }

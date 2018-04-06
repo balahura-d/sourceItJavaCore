@@ -8,7 +8,7 @@ import lesson9.homework9.MyList;
 
 public class NewDefaultList<T> implements MyList<T>, ListIterable {
 
-	private int capacity = 10;
+	public int capacity = 10;
 	private int size = 0;
 	Object[] data;
 
@@ -31,14 +31,14 @@ public class NewDefaultList<T> implements MyList<T>, ListIterable {
 			return "{empty}";
 		StringBuilder sb = new StringBuilder();
 		sb.append("[");
-		for (int i = 0; ; i++) {
+		for (int i = 0;; i++) {
 			sb.append(get(i).toString());
-			if (i == (size()-1))
+			if (i == (size() - 1))
 				return sb.append(']').toString();
 			sb.append(", ");
 		}
 	}
-	
+
 	public ListIterator<Object> listIterator(int index) {
 		if (index < 0 || index > size)
 			throw new IndexOutOfBoundsException("Index: " + index);
@@ -55,9 +55,12 @@ public class NewDefaultList<T> implements MyList<T>, ListIterable {
 	@Override
 	public void add(T t) {
 		data[size] = t;
-		if ((size++) == capacity) {
+		if ((++size) == capacity) {
 			capacity = (int) ((capacity * 1.5 < Integer.MAX_VALUE) ? (capacity * 1.5)
 					: (Integer.MAX_VALUE));
+			Object[] newArray = new Object[capacity];
+			System.arraycopy(data, 0, newArray, 0, data.length);
+			data = newArray;
 		}
 	}
 
