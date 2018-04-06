@@ -1,6 +1,7 @@
 package lesson11.homework;
 
 import java.util.Arrays;
+import java.util.Iterator;
 
 public class AnotherDemoDefaultList {
 
@@ -22,6 +23,14 @@ public class AnotherDemoDefaultList {
 		
 		System.out.println("containsAll() check: "+ndl.containsAll(ndl2));
 		
+		for (Object obj : ndl) {
+			System.out.println(obj);
+		}
+		
+		Iterator<Object> it = ndl.iterator();
+		while (it.hasNext()) {
+			System.out.println(it.next());
+		}
 	}
 
 }
