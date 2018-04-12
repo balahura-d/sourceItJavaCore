@@ -1,6 +1,6 @@
-package lesson6.homework.sweets;
+package lesson06.homework.sweets;
 
-import lesson6.homework.Sweets;
+import lesson06.homework.Sweets;
 
 public class Candies implements Sweets {
 

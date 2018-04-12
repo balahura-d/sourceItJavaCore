@@ -1,10 +1,10 @@
-package lesson6.homework;
+package lesson06.homework;
 
 import java.util.ArrayList;
 
-import lesson6.homework.sweets.Candies;
-import lesson6.homework.sweets.Chokolate;
-import lesson6.homework.sweets.Cookies;
+import lesson06.homework.sweets.Candies;
+import lesson06.homework.sweets.Chokolate;
+import lesson06.homework.sweets.Cookies;
 
 public class CandyShop {
 	public static class ProductRange {

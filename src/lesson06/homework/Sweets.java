@@ -1,4 +1,4 @@
-package lesson6.homework;
+package lesson06.homework;
 
 public interface Sweets {
 	double getWeight();
