@@ -8,7 +8,7 @@ package lesson7.account;
  * @author Дом
  */
 public class Account {
-	
+
 	class Transact {
 
 	}
