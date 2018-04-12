@@ -1,9 +1,9 @@
-package lesson5;
+package lesson05;
 
 import java.util.ArrayList;
 
-import lesson5.Book;
-import lesson5.Content;
+import lesson05.Book;
+import lesson05.Content;
 
 public class Main {
 	public static void main(String[] args) {

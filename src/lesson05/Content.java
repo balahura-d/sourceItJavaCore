@@ -1,4 +1,4 @@
-package lesson5;
+package lesson05;
 
 enum Jenre {
 	POETRY, PROSE, DRAMA, NATURAL_SCIENCE, PSYHOLOGY, HISTORY, LOW

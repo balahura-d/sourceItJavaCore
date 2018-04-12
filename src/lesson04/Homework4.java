@@ -1,4 +1,4 @@
-package lesson4;
+package lesson04;
 
 import java.util.Arrays;
 import java.util.Formatter;

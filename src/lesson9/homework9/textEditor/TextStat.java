@@ -50,7 +50,7 @@ public class TextStat {
 	}
 	private static void methForForEach(String s) {
 		System.out.println(s);
-		sumOfWords += lesson4.Homework4.numberOfWords(s);
+		sumOfWords += lesson04.Homework4.numberOfWords(s);
 		sumOfChars += s.length();
 	}
 }
