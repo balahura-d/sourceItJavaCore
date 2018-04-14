@@ -1,9 +1,7 @@
 package lesson14.homework;
 
 public class Task1 {
-
 	public static void main(String[] args) {
-
 		Runnable runnable = new Runnable() {
 			@Override
 			public void run() {
@@ -14,17 +12,14 @@ public class Task1 {
 					internal.interrupt();
 					System.out.println("That's all :)");
 				} catch (InterruptedException i_ex) {
-
+					i_ex.printStackTrace();
 				}
 			}
 		};
-
 		Thread external = new Thread(runnable);
 		external.start();
-
 	}
 }
-
 class InternalThread extends Thread {
 	@Override
 	public void run() {
@@ -34,12 +29,6 @@ class InternalThread extends Thread {
 				Thread.sleep(500);
 			}
 		} catch (InterruptedException i_ex) {
-
 		}
 	}
-
 }
-
-//у класса коллекшнс есть .synchronized для получения потокобезопасных версий коллекций
-
-//
