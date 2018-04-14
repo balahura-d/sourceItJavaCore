@@ -30,8 +30,8 @@ class InternalThread extends Thread {
 	public void run() {
 		try {
 			while (true) {
-				Thread.sleep(500);
 				System.out.println(Thread.currentThread().getName());
+				Thread.sleep(500);
 			}
 		} catch (InterruptedException i_ex) {
 
@@ -39,3 +39,7 @@ class InternalThread extends Thread {
 	}
 
 }
+
+//у класса коллекшнс есть .synchronized для получения потокобезопасных версий коллекций
+
+//
