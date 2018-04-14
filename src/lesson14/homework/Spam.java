@@ -16,12 +16,32 @@ public class Spam {
 		// }
 		// }
 		// }
-		
-		try(Scanner scan = new Scanner(System.in)) {
-			if (scan.hasNext()) {
-				return;
-			}
-			
+		// public void sendSpam (long[] millis/*, String[] messages*/) {
+		// if (millis.length == messages.length)
+		// for (int i = 0; i < millis.length; i++) {
+		// Thread.sleep(millis[i]);
+		// System.out.println(messages[i]);
+		// }
+		// }
+
+		try (Scanner scan = new Scanner(System.in)) {
+			while (true)
+				if (scan.hasNext()) {
+					return;
+				}
+
 		}
+	}
+
+	public void spam(long[] millis, String[] messages) {
+		if (millis.length == messages.length)
+			for (int i = 0; i < millis.length; i++) {
+				try {
+					Thread.sleep(millis[i]);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				System.out.println(messages[i]);
+			}
 	}
 }
