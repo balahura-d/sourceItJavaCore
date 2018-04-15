@@ -1,6 +1,6 @@
 package lesson14.homework;
 
-import java.util.Scanner;
+import java.io.IOException;
 
 public class Spam {
 
@@ -13,19 +13,15 @@ public class Spam {
 	}
 
 	public void spam() {
-		try /*(Scanner scan = new Scanner(System.in))*/ {
-			int i = 1;	//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-			thread.start();
+		try {
+			potokCherezOtrezkiVremenyPechataetCoobshchenija.start();
 			while (true) {
-				System.out.println(i++); //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-				Thread.sleep(100); //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-				if (true/*scan.hasNext()*/) {
-					System.out.println("<<<Read ENTER"); //~~~~~~~~~~~~~~~~~~~~~~~~~~
-					Thread.sleep(4000); //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-					thread.interrupt(); //39
+				if (System.in.available() > 0 && System.in.read() == '\n') {
+					System.setIn(System.in);
+					potokCherezOtrezkiVremenyPechataetCoobshchenija.interrupt();
 				}
 			}
-		} catch (InterruptedException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
@@ -44,6 +40,6 @@ public class Spam {
 				}
 		}
 	};
-	Thread thread = new Thread(runnable);
+	Thread potokCherezOtrezkiVremenyPechataetCoobshchenija = new Thread(runnable);
 
 }
