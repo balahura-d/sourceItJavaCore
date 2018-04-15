@@ -8,16 +8,19 @@ public class Task2 {
 		long[] millis = {     700,    1000,   700,    1500,   400,    1700,   2500 };
 		String[] messages = { "msg1", "msg2", "msg3", "msg4", "msg5", "msg6", "msg7" };
 
-		final Spam spam = new Spam(millis, messages);
+	//	/*final*/ Spam spam = new Spam(millis, messages);
 
-		Thread potokKotoryjZapuskaetSpam = new Thread() {
-			@Override
-			public void run() {
-				spam.spam();
-			}
-		};
+//		Thread potokKotoryjZapuskaetSpam = new Thread() {
+//			@Override
+//			public void run() {
+//				spam.spam();
+//			}
+//		};
 		try {
-			potokKotoryjZapuskaetSpam.start();
+//			potokKotoryjZapuskaetSpam.start();
+	//		spam.start();
+			@SuppressWarnings("unused")
+			Spam spam = new Spam(millis, messages);
 			Thread.sleep(5000); //остановка основного потока
 			System.out.println(">>>Press ENTER");//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~``
 			System.setIn(new ByteArrayInputStream(new byte[]{'\n'}));
