@@ -11,15 +11,15 @@ import java.util.List;
  * @author Дом
  */
 public class RecordBook {
-	enum Grade {
-		Exam, Credit
+	public enum Grade { //уровень оценивания
+		EXAM, CREDIT
 	}
 
-	static final int POINT_SYSTEM = 5;
+	static final int POINT_SYSTEM = 5; //пятибальная система
 
-	private String studentName;
-	private LocalDate entranse;
-	List<Record> session;
+	private String studentName;//имя
+	private LocalDate entranse;//дата вступления
+	List<Record> session;//лист экзаменов
 
 	public RecordBook(String studentName, int year, int month, int dayOfMonth) {
 		this.studentName = studentName;
@@ -36,6 +36,8 @@ public class RecordBook {
 	}
 
 	public void add(Grade grade, String discipline, int mark, String lecturerName) {
+		if (mark<=0 || mark>POINT_SYSTEM)
+			throw new IllegalArgumentException("Mark must be 0 < mark <= "+POINT_SYSTEM+", not "+mark+"!");
 		session.add(new Record(grade, discipline, mark, lecturerName));
 	}
 
