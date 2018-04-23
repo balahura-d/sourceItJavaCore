@@ -4,15 +4,9 @@ import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Создать класс Account с внутренним классом, с помощью объектов которого можно
- * хранить информацию обо всех операциях со счетом (снятие, платежи,
- * поступления).
- * 
- * @author Дом
- */
-public class Account {
+import lesson7.account.Account.Transact;
 
+public class Account2 {
 	static int sid = 0;
 
 	private String ownerName;
@@ -20,7 +14,7 @@ public class Account {
 	private double amount;
 	private List<Transact> transacts;/* = new LinkedList<>(); */
 
-	public Account(String name) {
+	public Account2(String name) {
 		if (name.length() < 0)
 			throw new IllegalArgumentException("Account owner must have a name!");
 		this.ownerName = name;
@@ -49,49 +43,46 @@ public class Account {
 		return ownerName;
 	}
 
-	public boolean addTrancfer(Account partner, boolean transfer, double amount) {
-		Transact temp = new Transact(partner, transfer, amount);
-		transacts.add(temp);
-		if (temp.passed) {
-			if (transfer) {
-				this.amount -= amount;
-				partner.setAmount(partner.getAmount() + amount);
-			} else {
-				this.amount += amount;
-				partner.setAmount(partner.getAmount() - amount);
-			}
-		}
-		return temp.passed;
-	}
+//	public boolean addTrancfer(Account partner, boolean transfer, double amount) {
+//		Transact temp = new Transact(partner, transfer, amount);
+//		transacts.add(temp);
+//		if (temp.passed) {
+//			if (transfer) {
+//				this.amount -= amount;
+//				partner.setAmount(partner.getAmount() + amount);
+//			} else {
+//				this.amount += amount;
+//				partner.setAmount(partner.getAmount() - amount);
+//			}
+//		}
+//		return temp.passed;
+//	}
 
 	@Override
 	public String toString() {
 		return String.format("id:%d; name:%s; amount:%.2f transacts:\n%s", id, ownerName, amount,
 				transacts.toString());
 	}
-
-	class Transact {
-		Account partner;
-		boolean transfer;
+	static class Transact {
+		Account transmitter;
+		Account recipient;
 		double amount;
 		LocalDateTime date;
 		boolean passed;
 
-		Transact(Account partner, boolean transfer, double amount) {
-			this.partner = partner;
-			this.transfer = transfer;
+		Transact(Account transmitter, Account recipient, double amount) {
+			this.transmitter = transmitter;
+			this.recipient = recipient;
 			this.amount = amount;
 			this.date = LocalDateTime.now();
 
-			if (transfer) {
-				passed = verify(Account.this, amount);
-			} else {
-				passed = verify(partner, amount);
-			}
+
+				passed = verify(transmitter, amount);
+
 		}
 
-		private boolean verify(Account sender, double amount) {
-			if (sender.getAmount() > amount) {
+		private boolean verify(Account transmitter, double amount) {
+			if (transmitter.getAmount() > amount) {
 				return true;
 			} else {
 				return false;
@@ -100,12 +91,11 @@ public class Account {
 
 		@Override
 		public String toString() {
-			StringBuilder sb = new StringBuilder("Transfer ");
-			if (transfer)
-				sb.append("to ");
-			else
-				sb.append("from ");
-			sb.append(partner.getName() + ". ");
+			StringBuilder sb = new StringBuilder("Transfer from ");
+			sb.append(transmitter.getName()
+					+ "to ");
+			sb.append(recipient.getName()
+					+ ". ");
 			sb.append(amount + " денег ");
 			if (!passed)
 				sb.append("не ");
