@@ -1,4 +1,4 @@
-package lesson7.recordBook;
+package lesson07.recordBook;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
