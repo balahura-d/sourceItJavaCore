@@ -101,6 +101,9 @@ public class DefaultMyList<T> implements MyList<T>  {
 	public T get(int index) {
 		return obj.get(index);
 	}
+	public int getNum(int index) {
+		return numOfObj.get(index);
+	}
 
 	public String toString() {
 		if (this.size() == 0)
