@@ -1,4 +1,4 @@
-package lesson8.homework8;
+package lesson08.homework8;
 
 public class ConvertNumbersFromArabicToRomanAndViceVersa {
 

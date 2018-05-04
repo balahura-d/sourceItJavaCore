@@ -1,4 +1,4 @@
-package lesson8;
+package lesson08;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,15 +10,15 @@ public class Classwork8 {
 	public static void main(String[] args) throws Throwable {/*
 		// TODO Auto-generated method stub
 		// ## Exceptions ##
-		// пример: throw new IllegalArgumentException();
-		try { // блок кода, где возможно исключене
+		// пїЅпїЅпїЅпїЅпїЅпїЅ: throw new IllegalArgumentException();
+		try { // пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 			System.out.println(5 / 0);
 		} catch (Throwable t) {
 			System.out.println("Error is happend!");
 		} finally {
-			// этот блок отработает всегда
-			// тут стоит, например, закрывать подключения
-			// сначала отработает файнали-блок, потом выбросит исключения
+			// пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+			// пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+			// пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 		}
 		try {
 			doSmth();
